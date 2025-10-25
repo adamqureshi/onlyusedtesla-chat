@@ -16,10 +16,13 @@ body {
   color: var(--ink);
 }
 
+/* Layout */
 .wrap { max-width: 840px; margin: 0 auto; padding: 24px; }
 .header { margin: 6px 0 18px; }
 .header h1 { font-size: 22px; margin: 0 0 6px; }
 .header p { margin: 0; color: var(--muted); font-size: 14px; }
+.topline { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 12px; }
+.pill { border: 1px solid #26262c; padding: 4px 8px; border-radius: 999px; }
 
 .card {
   border: 1px solid var(--border);
@@ -28,9 +31,10 @@ body {
   overflow: hidden;
 }
 
+/* Chat area */
 .chat {
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr auto auto; /* messages, chips, composer */
   height: min(72vh, 680px);
 }
 
@@ -55,6 +59,29 @@ body {
   margin: 8px 0 16px;
 }
 
+/* Quick-reply chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 10px 0;
+  border-top: 1px solid var(--border);
+  background: #0f0f12;
+}
+.chip {
+  appearance: none;
+  border: 1px solid #26262c;
+  background: #15151a;
+  color: var(--ink);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.chip:hover { border-color: #2f2f36; }
+.chip:disabled { opacity: .6; cursor: default; }
+
+/* Composer */
 .composer {
   display: flex;
   gap: 8px;
@@ -81,6 +108,13 @@ body {
   cursor: pointer;
 }
 
-.topline { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 12px; }
-.pill { border:1px solid #26262c; padding:4px 8px; border-radius:999px; }
+/* Footer */
 .footer { margin-top: 10px; color: var(--muted); font-size: 11px; }
+
+/* Optional: nicer scrollbars (WebKit) */
+.msgs::-webkit-scrollbar { width: 10px; }
+.msgs::-webkit-scrollbar-thumb { background: #2a2a2f; border-radius: 8px; }
+.msgs::-webkit-scrollbar-track { background: #131316; }
+
+
+
