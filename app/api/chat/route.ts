@@ -25,5 +25,6 @@ export async function POST(req: Request) {
     ]
   });
 
-  return result.toAIStreamResponse();
+  // ✅ use the current helper for useChat-compatible streaming
+  return result.toDataStreamResponse();
 }
