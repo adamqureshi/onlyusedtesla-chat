@@ -4,14 +4,26 @@ import { useChat } from 'ai/react';
 import { useEffect, useRef } from 'react';
 
 export default function Page() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    api: '/api/chat'
-  });
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    append,        // ⬅️ added: lets us send a message programmatically
+  } = useChat({ api: '/api/chat' });
+
   const scroller = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight });
   }, [messages]);
+
+  // ⬅️ quick send helper
+  function sendQuick(text: string) {
+    if (isLoading) return;
+    append({ role: 'user', content: text });
+  }
 
   return (
     <main className="wrap">
@@ -45,6 +57,19 @@ export default function Page() {
           )}
         </div>
 
+        {/* ⬇️ Quick-reply chips live here, just above the composer */}
+        <div className="chips">
+          <button className="chip" onClick={() => sendQuick("What does the $47 listing include?")}>
+            $47 listing?
+          </button>
+          <button className="chip" onClick={() => sendQuick("How do dealers upload inventory (CSV/FTP)?")}>
+            Dealer import
+          </button>
+          <button className="chip" onClick={() => sendQuick("How do cash offers work? What do you need from me?")}>
+            Cash offers
+          </button>
+        </div>
+
         <form className="composer" onSubmit={handleSubmit}>
           <input
             className="input"
@@ -63,3 +88,5 @@ export default function Page() {
     </main>
   );
 }
+
+      
